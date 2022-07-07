@@ -90,17 +90,16 @@ process img_parser {
 
     script:
     """
-    tar xzf ${genome_tarball}
-    rm -rf ${genome_tarball}
-    
-    # some gffs contain a fasta portion as well
-    # split the gff into gff + fasta
-    # sort the gff by col1 (contig name) and col 4,5 (start, stop)
-    setup_inputs.sh ${genome_id}
-    
-    img_to_neptune_via_gremlin.py \\
-      --gff ${genome_id}/${genome_id}.gff.sorted \\
-      --pfam ${genome_id}/${genome_id}.pfam.tab.txt \\
-      --prefix ${genome_id}/${genome_id}
+    ls -lhtr
     """
 }
+
+    // tar xzf ${genome_tarball}
+    // rm -rf ${genome_tarball}
+    
+    // setup_inputs.sh ${genome_id}
+    
+    // img_to_neptune_via_gremlin.py \\
+    //   --gff ${genome_id}/${genome_id}.gff.sorted \\
+    //   --pfam ${genome_id}/${genome_id}.pfam.tab.txt \\
+    //   --prefix ${genome_id}/${genome_id}
