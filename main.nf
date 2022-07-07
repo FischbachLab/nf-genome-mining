@@ -90,16 +90,19 @@ process img_parser {
 
     script:
     """
-    ls -lhtr
+    tar xzf ${genome_tarball}
+    rm -rf ${genome_tarball}
+    
+    # split a gff file if it also contains sequences 
+    # after the `##FASTA` header.
+    # sort the gff file based on contig name (col1) and 
+    # start (col4), stop (col5) coordinates
+    # check if pfam file is present if not, exit with error.
+    setup_inputs.sh ${genome_id}
+    
+    img_to_neptune_via_gremlin.py \\
+      --gff ${genome_id}/${genome_id}.gff.sorted \\
+      --pfam ${genome_id}/${genome_id}.pfam.tab.txt \\
+      --prefix ${genome_id}/${genome_id}
     """
 }
-
-    // tar xzf ${genome_tarball}
-    // rm -rf ${genome_tarball}
-    
-    // setup_inputs.sh ${genome_id}
-    
-    // img_to_neptune_via_gremlin.py \\
-    //   --gff ${genome_id}/${genome_id}.gff.sorted \\
-    //   --pfam ${genome_id}/${genome_id}.pfam.tab.txt \\
-    //   --prefix ${genome_id}/${genome_id}
