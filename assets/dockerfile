@@ -6,4 +6,4 @@ COPY requirements.txt .
 
 RUN pip install -U -r requirements.txt
 
-ENTRYPOINT ["/bin/sh","-c","/bin/bash"]
+CMD ["/bin/sh","-c","/bin/bash"]
