@@ -16,17 +16,17 @@ import argparse
 import pandas as pd
 
 
-def read_external_fasta(file_name):
-    fasta = {}
-    with open(file_name) as fp:
-        lines = fp.read().splitlines()
-        current_fasta = ""
-        for line in lines:
-            if line[0] == ">":
-                current_fasta = line[1:]
-            elif len(line) > 5:
-                fasta[current_fasta] = line
-    return fasta
+# def read_external_fasta(file_name):
+#     fasta = {}
+#     with open(file_name) as fp:
+#         lines = fp.read().splitlines()
+#         current_fasta = ""
+#         for line in lines:
+#             if line[0] == ">":
+#                 current_fasta = line[1:]
+#             elif len(line) > 5:
+#                 fasta[current_fasta] = line
+#     return fasta
 
 
 def parse_gff_record(line):
@@ -211,12 +211,19 @@ def get_pfam_node(line: str) -> tuple:
 #     return record["gene_oid"], node["id"], content
 
 
+def nonblank_lines(f):
+    for l in f:
+        line = l.rstrip()
+        if line:
+            yield line
+
+
 def ingest_gff_file(gff_file: str) -> tuple:
     vertices = list()
     edges = list()
     gene_neighbors = dict()
     with open(gff_file) as gff:
-        for line in gff.readlines():
+        for line in nonblank_lines(gff):
             if re.match("##FASTA", line):
                 break
             if line[0] == "#":
