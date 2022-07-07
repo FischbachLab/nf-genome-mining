@@ -5,7 +5,7 @@ A Nextflow pipeline to convert annotated genome data from IMG to AWS Neptune pro
 ```{bash}
 aws batch submit-job \
     --profile maf \
-    --job-name nf-gm-0707-2 \
+    --job-name nf-gm-0707-3 \
     --job-queue priority-maf-pipelines \
     --job-definition nextflow-production \
     --container-overrides command=FischbachLab/nf-genome-mining,\
