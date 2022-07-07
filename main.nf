@@ -77,11 +77,13 @@ if(params.seedfile){
  */
 process img_parser {
     tag "${genome_id}"
-    
+
+    container params.job_container
+
     publishDir "${workingpath}", mode: 'copy', pattern: "${genome_id}*.csv.gz"
 
     input:
-    val(genome_id), path(genome_tarball) from img_genome_tarball_ch
+    tuple val(genome_id), path(genome_tarball) from img_genome_tarball_ch
 
     output:
     path("${genome_id}*.csv.gz")
