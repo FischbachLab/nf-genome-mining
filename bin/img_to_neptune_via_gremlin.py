@@ -2,7 +2,7 @@
 # output should follow the convention detailed here:
 # https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
 
-# import sys
+import sys
 import re
 
 # import json
@@ -211,23 +211,19 @@ def get_pfam_node(line: str) -> tuple:
 #     return record["gene_oid"], node["id"], content
 
 
-def nonblank_lines(f):
-    for l in f:
-        line = l.rstrip()
-        if line:
-            yield line
-
-
 def ingest_gff_file(gff_file: str) -> tuple:
     vertices = list()
     edges = list()
     gene_neighbors = dict()
     with open(gff_file) as gff:
-        for line in nonblank_lines(gff):
+        for line in gff.readlines():
             if re.match("##FASTA", line):
                 break
             if line[0] == "#":
                 continue
+            if line.strip() == "":
+                continue
+
             gene_node = get_gene_node(line)
             if gene_node is None:
                 continue
