@@ -352,14 +352,17 @@ def main():
     pfam_edges_out = f"{args.prefix}.pfam_edges.csv.gz"
 
     # tigrfam_json = f"{args.prefix}.tigrfam.json"
-
+    logging.info("Ingesting Gene data ...")
     gene_nodes, gene_edges = ingest_gff_file(args.gff)
     pd.DataFrame(gene_nodes).to_csv(gene_nodes_out, index=False, compression="gzip")
     pd.DataFrame(gene_edges).to_csv(gene_edges_out, index=False, compression="gzip")
+    logging.info(f"\tSaving {gene_nodes_out} and {gene_edges_out}")
 
+    logging.info("Ingesting PFam data ...")
     pfam_nodes, pfam_edges = ingest_pfam_file(args.pfam)
     pd.DataFrame(pfam_nodes).to_csv(pfam_nodes_out, index=False, compression="gzip")
     pd.DataFrame(pfam_edges).to_csv(pfam_edges_out, index=False, compression="gzip")
+    logging.info(f"\tSaving {pfam_nodes_out} and {pfam_edges_out}")
 
     # tigrfam_content = ingest_tigrfam_file(args.tigrfam)
     # save_to_json(tigrfam_content, tigrfam_json)

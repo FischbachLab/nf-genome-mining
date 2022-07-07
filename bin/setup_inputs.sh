@@ -41,3 +41,5 @@ elif [[ ${NUM_PFAM_FILES} -eq 1 ]]; then
     FOUND_PFAM=$(find ${GENOME_DIR}/ -name "*pfam*")
     mv ${FOUND_PFAM} ${PFAM_FILE}
 fi
+
+echo "Done!"
