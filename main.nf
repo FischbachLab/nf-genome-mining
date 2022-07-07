@@ -103,6 +103,6 @@ process img_parser {
     img_to_neptune_via_gremlin.py \\
       --gff ${genome_id}/${genome_id}.gff.sorted \\
       --pfam ${genome_id}/${genome_id}.pfam.tab.txt \\
-      --prefix ${genome_id}/${genome_id}
+      --prefix ${genome_id}
     """
 }
