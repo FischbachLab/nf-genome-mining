@@ -1,0 +1,9 @@
+FROM python:latest
+
+WORKDIR /opt/work
+
+COPY requirements.txt .
+
+RUN pip install -U -r requirements.txt
+
+ENTRYPOINT [ "bash" ]

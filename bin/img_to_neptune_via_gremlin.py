@@ -2,9 +2,10 @@
 # output should follow the convention detailed here:
 # https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
 
-import sys
+# import sys
 import re
-import json
+
+# import json
 import urllib.parse
 
 # import os.path

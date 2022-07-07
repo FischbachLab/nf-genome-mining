@@ -98,7 +98,7 @@ process img_parser {
     # sort the gff by col1 (contig name) and col 4,5 (start, stop)
     setup_inputs.sh ${genome_id}
     
-    ${params.img_parser} \
+    img_to_neptune_via_gremlin.py \
       --gff ${genome_id}/${genome_id}.gff.sorted \
       --pfam ${genome_id}/${genome_id}.pfam.tab.txt \
       --prefix ${genome_id}/${genome_id}
